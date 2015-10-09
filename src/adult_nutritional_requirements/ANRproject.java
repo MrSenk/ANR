@@ -13,7 +13,8 @@ public class ANRproject {
         //Proceso Principal
         int mainOption;
         double imcAdult;
-        
+        double pesoProm;
+        double pesoIdeal;
         mainOption = menuPrincipal();
         //Métodos según opción ingresada
         switch(mainOption){
@@ -21,11 +22,30 @@ public class ANRproject {
                 imcAdult = calcularImc();
                 System.out.println("Su IMC es: "+imcAdult);
                 condicionPaciente(imcAdult);
+                break;
+            case 2:
+                imcAdult = 21.7;
+                pesoProm = calcularPeso(imcAdult);
+                System.out.println("Peso promedio aceptable: "+pesoProm+" kg");
+                break;
+            case 3:
+                imcAdult = 18.5;
+                pesoProm = calcularPeso(imcAdult);
+                System.out.println("Peso promedio MÍNIMO: "+pesoProm+" kg");
+                break;
+            case 4:
+                imcAdult = 24.9;
+                pesoProm = calcularPeso(imcAdult);
+                System.out.println("Peso promedio MÁXIMO: "+pesoProm+" kg");
+                break;
+            case 5:
+                pesoIdeal = calcularPeIdeal();
+                System.out.println("Peso Ideal: "+pesoIdeal+" kg");
         }
     }
     
     public static int menuPrincipal(){
-        //Primer menu de selección de rango de edad
+        //Menu Principal del programa
         int mainMenu = 0;
         boolean ciclo = true;
         
@@ -138,6 +158,65 @@ public class ANRproject {
                 }
             }
         }
+    }
+    
+    public static double calcularPeso(double x){
+        boolean ciclo = true;
+        double talla = 0;
+        double peso;
+        
+        do{
+            try{
+                System.out.println("Ingrese talla del paciente (en metros)");
+                System.out.print("Talla ingresada: ");
+                talla = input.nextDouble();
+                while(talla>2.5 || talla<0.7){
+                    System.out.println("ERROR: Ingrese un valor válido");
+                    System.out.print("Talla ingresada: ");
+                    talla = input.nextDouble();
+                }
+                ciclo = false;
+                
+            }catch(InputMismatchException e){
+                System.err.printf("\n ERROR: %s\n", e);
+                input.nextLine();
+                System.out.println("Sólo se aceptan valores numéricos");
+            }
+            
+        }while(ciclo);
+        
+        peso = (Math.pow(talla, 2))*x;
+        return peso;
+    }
+    
+    public static double calcularPeIdeal(){
+        boolean ciclo = true;
+        double talla = 0;
+        double peso;
+        
+        do{
+            try{
+                System.out.println("Ingrese talla del paciente (en metros)");
+                System.out.print("Talla ingresada: ");
+                talla = input.nextDouble();
+                while(talla>2.5 || talla<0.7){
+                    System.out.println("ERROR: Ingrese un valor válido");
+                    System.out.print("Talla ingresada: ");
+                    talla = input.nextDouble();
+                }
+                ciclo = false;
+                
+            }catch(InputMismatchException e){
+                System.err.printf("\n ERROR: %s\n", e);
+                input.nextLine();
+                System.out.println("Sólo se aceptan valores numéricos");
+            }
+            
+        }while(ciclo);
+        
+        talla = talla*100;
+        peso = (0.75*(talla-150)) + 50;
+        return peso;
     }
     
 }
