@@ -41,6 +41,7 @@ public class ANRproject {
             case 5:
                 pesoIdeal = calcularPeIdeal();
                 System.out.println("Peso Ideal: "+pesoIdeal+" kg");
+                break;
         }
     }
     
